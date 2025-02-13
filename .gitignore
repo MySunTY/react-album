@@ -22,4 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-URL_KEY = "guf4pTNeKtVqBIA8flUk8uosluFp4LiTNHZhp6XCiw8"
+
+
+.env

@@ -22,5 +22,8 @@ export default defineConfig({
         additionalData : `@use "@assets/styles/main.scss";`,
       }
     }
+  },
+  define: {
+    'process.env': {}  // process.env를 빈 객체로 정의
   }
 })
