@@ -14,7 +14,7 @@ function index() {
     const getData= async ()=>{
         //오픈 API 호출
         const API_URL = "https://api.unsplash.com/search/photos"
-        const API_KEY = "guf4pTNeKtVqBIA8flUk8uosluFp4LiTNHZhp6XCiw8"
+        const API_KEY = ""
         const PER_PAGE = 30
 
         const searchValue = "Korea"
