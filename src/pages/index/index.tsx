@@ -4,6 +4,7 @@ import CommonSearchBar from "@/components/common/searchBar/CommonSearchBar"
 import CommonNav from "@/components/common/navigation/CommonNav"
 import CommonFooter from "@/components/common/footer/CommonFooter"
 import Card from "./components/Card"
+import DetailDialog from "@/components/common/dialog/DetailDialog"
 
 import { useState } from "react"
 import { CardDTO } from "./types/card"
@@ -13,12 +14,13 @@ import { imageData } from "@/recoil/selectors/imageSelector"
 
 function index() {
     const imageSelector = useRecoilValue(imageData)
-    const [imgData, setImgData] = useState<CardDTO[]>([])
+    const [imgData, setImgData] = useState<CardDTO>()
+    const [open , setOpen] =useState<boolean>(false)// 이미지 상세 다이얼로그 관리 state
     
 
     const CARD_LIST = imageSelector.data.results.map((card:CardDTO)=>{
         return(
-            <Card data={card} key={card.id} />
+            <Card data={card} key={card.id} handleDialog={setOpen} handleSetData={setImgData} />
         )
     })
 
@@ -47,6 +49,8 @@ function index() {
         </div>
         {/* 공통 푸터 UI */}
         <CommonFooter />
+        {open && <DetailDialog data={imgData} />}
+        
     </div>
   )
 }
