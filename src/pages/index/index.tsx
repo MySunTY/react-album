@@ -6,24 +6,36 @@ import CommonFooter from "@/components/common/footer/CommonFooter"
 import Card from "./components/Card"
 import DetailDialog from "@/components/common/dialog/DetailDialog"
 
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { CardDTO } from "./types/card"
-import { useRecoilValue } from "recoil"
+import { useRecoilValue, useRecoilValueLoadable } from "recoil"
 import { imageData } from "@/recoil/selectors/imageSelector"
 
 
 function index() {
-    const imageSelector = useRecoilValue(imageData)
+    //const imageSelector = useRecoilValue(imageData)
+    const imageSelector = useRecoilValueLoadable(imageData)
     const [imgData, setImgData] = useState<CardDTO>()
     const [open , setOpen] =useState<boolean>(false)// 이미지 상세 다이얼로그 관리 state
     
 
-    const CARD_LIST = imageSelector.data.results.map((card:CardDTO)=>{
+    /*const CARD_LIST = imageSelector.data.results.map((card:CardDTO)=>{
         return(
             <Card data={card} key={card.id} handleDialog={setOpen} handleSetData={setImgData} />
         )
-    })
+    })*/
 
+    const CARD_LIST = useMemo(()=>{
+        
+        if(imageSelector.state ==="hasValue"){
+            const result = imageSelector.contents.map((card:CardDTO)=>{
+                return <Card data={card} key={card.id} handleDialog={setOpen} handleSetData={setImgData} />
+            })
+            return result
+        }else{
+            return <div>loading....</div>
+        }
+    },[imageSelector])
     
   return (
     <div className={styles.page}>
@@ -49,7 +61,7 @@ function index() {
         </div>
         {/* 공통 푸터 UI */}
         <CommonFooter />
-        {open && <DetailDialog data={imgData} />}
+        {open && <DetailDialog data={imgData} handleDialog={setOpen} />}
         
     </div>
   )
