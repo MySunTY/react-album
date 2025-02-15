@@ -2,18 +2,22 @@ import { useState } from "react"
 import styles from "./CommonSearchBar.module.scss"
 import { useRecoilState } from "recoil"
 import { searchState } from "@/recoil/atoms/searchState"
+import { pageState } from "@/recoil/atoms/pageState"
 
 function CommonSearchBar() {
   const [search, setSearch] = useRecoilState(searchState)
   const [text, setText] = useState('')
-  const onChange = (e) =>{
+  const [page, setPage] = useRecoilState(pageState)
+  const onChange = (e : React.ChangeEvent<HTMLInputElement>) =>{
     setText(e.target.value)
   }
   const onClickSearch = ()=>{
       if(text ===''){
         setSearch('Korea')
+        setPage(1)
       }else{
         setSearch(text)
+        setPage(1)
       }
   }
   const handleKeyDown=(e:React.KeyboardEvent)=>{
@@ -21,8 +25,10 @@ function CommonSearchBar() {
       if(text ===""){
         //input 태그가 빈상태로 검색하면 default 값
         setSearch('Korea')
+        setPage(1)
       }else{
         setSearch(text)
+        setPage(1)
       }
     }
   }

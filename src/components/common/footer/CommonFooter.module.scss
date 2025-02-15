@@ -51,10 +51,17 @@
             color: main.$color-black-900;
         }
         &.active{
-            background-color:  main.$color-gray-100;
+            background-color:  main.$color-warning-400;
             border-radius: 4px;
 
             color : main.$color-black-900;
         }
+        &.inactive{
+            background-color:  main.$color-white-000;
+            border-radius: 4px;
+
+            color : main.$color-black-900;
+        }
+        
     }
 }
