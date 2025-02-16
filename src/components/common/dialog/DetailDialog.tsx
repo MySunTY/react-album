@@ -50,6 +50,18 @@ function DetailDialog({data, handleDialog}:Props) {
         }else if(!getLocalStorage){
             return
         }
+
+        //ESC키 눌렀을때 다이어로그 창 닫기
+        const escKeyDownCloseDialog= (e:any)=>{
+            console.log("닫는 함수 호출")
+            if(e.key==="Escape"){
+                closeDialog()
+            }
+
+        }
+        document.addEventListener('keydown',escKeyDownCloseDialog)
+        return ()=>document.removeEventListener('keydown',escKeyDownCloseDialog)
+
     },[])
 
   return (

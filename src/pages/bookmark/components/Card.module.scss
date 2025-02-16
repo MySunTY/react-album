@@ -54,7 +54,13 @@
                 width : 120px;
             }
             .value{
+                width: 112px;
                 color : main.$color-gray-500;
+                //글씨가 길어지면 ...처리
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow:  ellipsis;
+                word-break: break-all;
             }
         }
     }
